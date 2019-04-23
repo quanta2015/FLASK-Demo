@@ -1,4 +1,5 @@
 import os, json, time, functools
+import markdown
 from flask import Blueprint, render_template,current_app,request,flash,redirect,url_for,session,g
 
 bp = Blueprint('index', __name__)
@@ -26,6 +27,8 @@ def home():
         fpath = path + '/' + f
         with open(fpath,'r') as load_f:
             cnt = json.load(load_f)
+            # cnt['content'] = markdown.markdown(cnt['content'])
+            # print cnt
             data.append(cnt)
 
     return render_template('index.html', data=data)
@@ -55,16 +58,27 @@ def new():
         return render_template('new.html')
 
 
-
-@bp.route('/upload/', methods=['GET', 'POST'])
+@bp.route('/uploadImg/', methods=['GET', 'POST'])
 @login_required
-def upload():
+def uploadImg():
     if request.method == 'POST':
+        print 'imgimg'
         f = request.files['file']
-        filename = current_app.root_path + '/data/upload.txt'
+        file = '/static/image/' + time.strftime("%Y%m%d%H%M%S", time.localtime()) + '.jpg'
+        filename = current_app.root_path + file
         f.save(filename)
-        flash('upload success!')
-    return render_template('upload.html')
+    return json.dumps({'filename': file })
+
+
+# @bp.route('/upload/', methods=['GET', 'POST'])
+# @login_required
+# def upload():
+#     if request.method == 'POST':
+#         f = request.files['file']
+#         filename = current_app.root_path + '/data/upload.txt'
+#         f.save(filename)
+#         flash('upload success!')
+#     return render_template('upload.html')
 
 
 

@@ -22,8 +22,10 @@
         <div class="m-nav">
           <a href="{{ url_for('index.home') }}"><li>Home</li></a>
           <a href="{{ url_for('index.new') }}"><li>New</li></a>
-          <a href="{{ url_for('index.upload') }}"><li>Upload</li></a>
+
+          {% if not session['isLogin'] %}
           <a href="{{ url_for('index.login') }}"><li>Login</li></a>
+          {% endif %}
 
           {% if session['isLogin'] %}
           <a href="{{ url_for('index.logout') }}"><li>Logout</li></a>
