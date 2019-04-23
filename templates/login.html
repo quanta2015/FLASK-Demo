@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+  <form method="post">
+    <div class="m-login">
+      <input type="text" name="m-usr" class="m-field" value="{% if session.usr %}{{ session.get('usr') }}{% endif %}">
+      <input type="password" name="m-pwd" class="m-field" value="{% if session.usr %}{{ session.get('pwd') }}{% endif %}">
+      <button type="submit" class="m-field">Login</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

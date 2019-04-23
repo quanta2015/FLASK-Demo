@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+  <form method="post">
+    <div class="m-new">
+      <input type="text" name="m-date" class="m-field">
+      <input type="text" name="m-title" class="m-field">
+      <textarea rows="10" name="m-content" class="m-field"></textarea>
+      <button type="submit" class="m-field">Add Blog</button>
+    </div>
+  </form>
+</section>
+{% endblock %}
+
+{% block include %}
+  <script type="text/javascript" src="{{ url_for('static', filename='new.js') }}"></script>
+{% endblock %}

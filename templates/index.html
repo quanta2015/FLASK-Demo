@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+  {% for d in data %}
+  <div class="m-blog">
+    <div class="m-title">{{d.date}}</div>
+    <div class="m-body">
+      <h3>{{d.title}}</h3>
+      <p>{{d.content}}</p>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}

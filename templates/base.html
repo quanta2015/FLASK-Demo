@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='daterangepicker.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    
+    <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='daterangepicker.js') }}"></script>
+  </head>
+  <body>
+    <div class="g-blog">
+      <nav>
+        {% if session['isLogin'] %}
+        <div class="m-info">{{ session['usr'] }}</div>
+        {% endif %}
+
+        <div class="m-title">Blog</div>
+        <div class="m-nav">
+          <a href="{{ url_for('index.home') }}"><li>Home</li></a>
+          <a href="{{ url_for('index.new') }}"><li>New</li></a>
+          <a href="{{ url_for('index.upload') }}"><li>Upload</li></a>
+          <a href="{{ url_for('index.login') }}"><li>Login</li></a>
+
+          {% if session['isLogin'] %}
+          <a href="{{ url_for('index.logout') }}"><li>Logout</li></a>
+          {% endif %}
+        </div>
+      </nav>
+
+      {% for message in get_flashed_messages() %}
+        <div class="m-flash">{{ message }}</div>
+      {% endfor %}
+
+      {% block content %}{% endblock %}
+    </div>
+
+     {% block include %}{% endblock %}
+  </body>
+</html>
